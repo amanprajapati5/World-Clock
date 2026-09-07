@@ -671,3 +671,60 @@ body {
 
     font-size: 12px;
 }
+
+/* ================================
+   Improved City Card
+================================ */
+
+.city-details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+.city-title {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    color: #f8fafc;
+
+    font-size: 17px;
+    font-weight: 600;
+}
+
+
+.city-flag {
+    font-size: 22px;
+}
+
+
+.city-country {
+    color: #94a3b8;
+
+    font-size: 13px;
+}
+
+
+.city-zone {
+    color: #64748b;
+
+    font-size: 12px;
+    letter-spacing: 0.3px;
+}
+
+
+.city-time {
+    color: #38bdf8;
+
+    font-size: 21px;
+    font-weight: 600;
+
+    letter-spacing: 1px;
+}
+ .city-day-night {
+    color: #94a3b8;
+    font-size: 12px;
+    margin-top: 2px;
+ }
