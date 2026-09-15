@@ -29,10 +29,21 @@
                     </div>
                 </div>
 
-                <div class="live-status">
-                    <span class="status-dot"></span>
-                    Live
-                </div>
+               <div class="header-actions">
+
+   <button
+    type="button"
+    id="themeBtn"
+    class="theme-btn">
+    🌙
+</button>
+
+    <div class="live-status">
+        <span class="status-dot"></span>
+        Live
+    </div>
+
+</div>
 
             </header>
 
@@ -98,7 +109,22 @@
                 >
 
             </div>
+            <div id="searchSuggestions" class="search-suggestions"></div>
+            <div id="searchHistory" class="search-history"></div>
+            <p id="resultCount" class="result-count"></p>
 
+            <div class="favorites-section">
+
+    <div class="favorites-header">
+        <div>
+            <p class="section-label">SAVED</p>
+            <h2>⭐ My Favorites</h2>
+        </div>
+    </div>
+
+    <div id="favoritesList"></div>
+
+</div>
 
             <!-- City List -->
             <div id="countryList"></div>

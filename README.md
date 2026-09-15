@@ -1,32 +1,38 @@
- ## World Clock
+# 🌍 World Clock
 
-A simple and responsive World Clock web application that shows the current Indian time and allows users to check the current time in different cities around the world.
+A responsive World Clock web application built with HTML, CSS and JavaScript.
 
-📌 About the Project
+It allows users to explore the current time across major cities around the world, search for cities, save favorites and switch between light and dark themes.
 
-I created this project to practice HTML, CSS, and JavaScript.
+## ✨ Features
 
-The main purpose of the project is to display the current time in India and provide a simple way to check the time of different cities.
+- 🌍 Live world clocks
+- 🏙️ 34 major cities
+- 🔎 Search by city or country
+- 💡 Search suggestions
+- 🕘 Recent search history
+- ⭐ Favorite cities
+- 💾 Favorites saved using LocalStorage
+- 🌐 Automatic UTC offset
+- ☀️ Day / 🌙 Night indicator
+- 🌙 Dark mode
+- ☀️ Light mode
+- 💾 Theme preference saved locally
+- 📱 Responsive design
+- ⚡ Automatic clock updates every second
 
-##  Features
-
-- 🇮🇳 Shows the current Indian time (IST)
--  Browse time of different cities
--  Search for a city
--  Time updates automatically every second
--  Responsive design for mobile devices
--  Clean and modern user interface
-
-##  Technologies Used
+## 🛠️ Technologies Used
 
 - HTML5
 - CSS3
 - JavaScript
-- Browser Internationalization API
+- Intl Internationalization API
+- LocalStorage
 
-##  Project Structure
+## 📂 Project Structure
 
-Live-Clock/
+```text
+World-Clock/
 │
 ├── index.html
 │
@@ -37,3 +43,23 @@ Live-Clock/
 │   └── script.js
 │
 └── README.md
+
+ 🚀 How to Run
+Clone the repository.
+Open the project folder.
+Open index.html in your browser.
+
+No installation or external API is required.
+
+
+🔮 Future Improvements
+Add more cities and locations
+Advanced timezone comparison
+Calendar and event integration
+More personalized time management features
+
+
+👨‍💻 Author
+Aman Prajapati
+
+Built as a JavaScript portfolio project.

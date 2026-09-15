@@ -1,6 +1,4 @@
-/* ================================
-   Basic Reset
-================================ */
+/* Basic Reset */
 
 * {
     margin: 0;
@@ -9,9 +7,7 @@
 }
 
 
-/* ================================
-   Page Background
-================================ */
+/* Page Background */
 
 body {
     font-family: Arial, sans-serif;
@@ -26,9 +22,7 @@ body {
 }
 
 
-/* ================================
-   Main Container
-================================ */
+/* Main Container */
 
 .container {
     width: 100%;
@@ -37,9 +31,7 @@ body {
 }
 
 
-/* ================================
-   Main Clock Card
-================================ */
+/*Main Clock Card */
 
 .clock-box {
     position: relative;
@@ -79,9 +71,7 @@ body {
 }
 
 
-/* ================================
-   Main Heading
-================================ */
+/*Main Heading */
 
 .clock-box h1 {
     position: relative;
@@ -103,9 +93,7 @@ body {
 }
 
 
-/* ================================
-   Subtitle
-================================ */
+/*Subtitle */
 
 .subtitle {
     position: relative;
@@ -118,9 +106,7 @@ body {
 }
 
 
-/* ================================
-   Main Clock Area
-================================ */
+/* Main Clock Area */
 
 .main-clock {
     position: relative;
@@ -144,9 +130,7 @@ body {
 }
 
 
-/* ================================
-   Main Time
-================================ */
+/* Main Time */
 
 .main-clock h2 {
     font-size: 60px;
@@ -162,9 +146,7 @@ body {
 }
 
 
-/* ================================
-   Main Date
-================================ */
+/* Main Date */
 
 .main-clock p {
     margin-top: 14px;
@@ -176,9 +158,7 @@ body {
 }
 
 
-/* ================================
-   Browse Button
-================================ */
+/* Browse Button */
 
 #browseBtn {
     position: relative;
@@ -224,9 +204,7 @@ body {
 }
 
 
-/* ================================
-   World Time Section
-================================ */
+/*World Time Section */
 
 .country-section {
     display: none;
@@ -247,9 +225,7 @@ body {
 }
 
 
-/* ================================
-   World Time Heading
-================================ */
+/*World Time Heading */
 
 .country-section h2 {
     margin-bottom: 22px;
@@ -261,9 +237,7 @@ body {
 }
 
 
-/* ================================
-   Search Box
-================================ */
+/*Search Box */
 
 #search {
     width: 100%;
@@ -304,9 +278,7 @@ body {
 }
 
 
-/* ================================
-   City Cards
-================================ */
+/* City Cards */
 
 .country-card {
     display: flex;
@@ -342,9 +314,7 @@ body {
 }
 
 
-/* ================================
-   City Name
-================================ */
+/* City Name */
 
 .country-name {
     color: #e2e8f0;
@@ -354,9 +324,7 @@ body {
 }
 
 
-/* ================================
-   City Time
-================================ */
+/* City Time */
 
 .country-time {
     color: #38bdf8;
@@ -368,9 +336,7 @@ body {
 }
 
 
-/* ================================
-   Mobile Responsive Design
-================================ */
+/* Mobile Responsive Design */
 
 @media (max-width: 600px) {
 
@@ -449,9 +415,7 @@ body {
         font-size: 19px;
     }
 }
-/* ================================
-   Header
-================================ */
+/* Header */
 
 .clock-header {
     position: relative;
@@ -508,9 +472,7 @@ body {
 }
 
 
-/* ================================
-   Live Status
-================================ */
+/* Live Status */ 
 
 .live-status {
     display: flex;
@@ -544,9 +506,7 @@ body {
 }
 
 
-/* ================================
-   Hero Clock
-================================ */
+/* Hero Clock */
 
 .hero-clock {
     text-align: center;
@@ -575,9 +535,7 @@ body {
 }
 
 
-/* ================================
-   Clock Information
-================================ */
+/* Clock Information */
 
 .clock-info {
     margin-top: -18px;
@@ -589,9 +547,7 @@ body {
 }
 
 
-/* ================================
-   World Time Section
-================================ */
+/* World Time Section */
 
 .section-header {
     margin-bottom: 22px;
@@ -620,9 +576,7 @@ body {
 }
 
 
-/* ================================
-   Search Wrapper
-================================ */
+/* Search Wrapper */
 
 .search-wrapper {
     position: relative;
@@ -655,9 +609,7 @@ body {
 }
 
 
-/* ================================
-   Footer
-================================ */
+/* Footer */
 
 .footer {
     padding: 24px 10px 5px;
@@ -672,9 +624,9 @@ body {
     font-size: 12px;
 }
 
-/* ================================
-   Improved City Card
-================================ */
+
+   /* Improved City Card */
+
 
 .city-details {
     display: flex;
@@ -729,11 +681,37 @@ body {
     margin-top: 2px;
  }
 
- .no-results {
+.no-results {
     text-align: center;
-    padding: 50px 20px;
-    color: #94a3b8;
+    padding: 60px 20px;
+
+    border: 1px dashed rgba(148, 163, 184, 0.2);
+    border-radius: 14px;
+
+    margin-top: 15px;
 }
+
+.no-results-icon {
+    font-size: 38px;
+    margin-bottom: 15px;
+}
+
+.no-results h3 {
+    color: #f8fafc;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.no-results p {
+    color: #64748b;
+    font-size: 13px;
+    margin: 0;
+}
+
+body.light-theme .no-results h3 {
+    color: #0f172a;
+}
+
 
 .no-results-icon {
     font-size: 35px;
@@ -804,4 +782,415 @@ body {
 .history-item:hover {
     background: rgba(56, 189, 248, 0.08);
     color: #f8fafc;
+}
+
+.city-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.favorite-btn {
+    background: transparent;
+    border: none;
+    color: #64748b;
+    font-size: 25px;
+    cursor: pointer;
+    padding: 5px;
+    transition: 0.2s ease;
+}
+
+.favorite-btn:hover {
+    color: #facc15;
+    transform: scale(1.15);
+}
+
+.favorite-btn {
+    min-width: 35px;
+}
+
+.favorites-section {
+    margin-top: 30px;
+    margin-bottom: 25px;
+}
+
+.favorites-header {
+    margin-bottom: 12px;
+}
+
+.favorites-header h2 {
+    color: #f8fafc;
+    font-size: 20px;
+    margin-top: 4px;
+}
+
+.favorite-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 15px 18px;
+    margin-bottom: 10px;
+
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.favorite-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(56, 189, 248, 0.35);
+}
+
+.favorite-city {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.favorite-city-name {
+    color: #f8fafc;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.favorite-country {
+    color: #64748b;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+.favorite-time {
+    color: #38bdf8;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.empty-favorites {
+    text-align: center;
+    padding: 25px 15px;
+
+    border: 1px dashed rgba(148, 163, 184, 0.2);
+    border-radius: 12px;
+
+    color: #64748b;
+}
+
+.empty-favorites div {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.empty-favorites p {
+    color: #94a3b8;
+    margin-bottom: 5px;
+}
+
+.empty-favorites span {
+    font-size: 12px;
+}
+
+@media (max-width: 600px) {
+
+    .favorite-card {
+        padding: 13px;
+    }
+
+    .favorite-time {
+        font-size: 13px;
+    }
+
+}
+
+/* Theme Button */
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.theme-btn {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 10px;
+
+    background: rgba(15, 23, 42, 0.6);
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.theme-btn:hover {
+    transform: scale(1.08);
+    background: rgba(56, 189, 248, 0.1);
+}
+
+/*Light Theme */
+
+body.light-theme {
+    background:
+        radial-gradient(
+            circle at top left,
+            #e0f2fe,
+            transparent 40%
+        ),
+        #f1f5f9;
+
+    color: #0f172a;
+}
+
+body.light-theme .clock-box {
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(15, 23, 42, 0.08);
+}
+
+body.light-theme .clock-header {
+    border-bottom-color: rgba(15, 23, 42, 0.08);
+}
+
+body.light-theme .brand h1 {
+    color: #0f172a;
+}
+
+body.light-theme .brand-text {
+    color: #64748b;
+}
+
+body.light-theme .hero-clock {
+    color: #0f172a;
+}
+
+body.light-theme .location-name {
+    color: #334155;
+}
+
+body.light-theme #date {
+    color: #64748b;
+}
+
+body.light-theme .clock-info {
+    color: #64748b;
+}
+
+body.light-theme .country-section {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+body.light-theme .country-section h2 {
+    color: #0f172a;
+}
+
+body.light-theme .section-description {
+    color: #64748b;
+}
+
+body.light-theme .search-wrapper {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(15, 23, 42, 0.1);
+}
+
+body.light-theme #search {
+    color: #0f172a;
+}
+
+body.light-theme #search::placeholder {
+    color: #94a3b8;
+}
+
+body.light-theme .country-card {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(15, 23, 42, 0.08);
+}
+
+body.light-theme .city-title {
+    color: #0f172a;
+}
+
+body.light-theme .city-country {
+    color: #64748b;
+}
+
+body.light-theme .city-zone {
+    color: #94a3b8;
+}
+
+body.light-theme .suggestion-item {
+    color: #334155;
+}
+
+body.light-theme .suggestion-item:hover {
+    background: rgba(14, 165, 233, 0.08);
+}
+
+body.light-theme .history-item {
+    color: #64748b;
+}
+
+body.light-theme .history-item:hover {
+    background: rgba(14, 165, 233, 0.08);
+    color: #0f172a;
+}
+
+body.light-theme .result-count {
+    color: #64748b;
+}
+
+body.light-theme .favorite-card {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(15, 23, 42, 0.08);
+}
+
+body.light-theme .favorite-city-name {
+    color: #0f172a;
+}
+
+body.light-theme .favorite-country {
+    color: #64748b;
+}
+
+body.light-theme .theme-btn {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(15, 23, 42, 0.1);
+}
+
+/* Smooth Theme Transition */
+
+body,
+.clock-box,
+.country-section,
+.country-card,
+.favorite-card,
+.search-wrapper,
+.theme-btn {
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* City Card Animation*/
+
+.country-card {
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.country-card:hover {
+    transform: translateY(-3px);
+}
+
+.selected-city {
+    border: 1px solid #38bdf8;
+
+    box-shadow:
+        0 0 15px rgba(56, 189, 248, 0.25);
+
+    transform: translateY(-1px);
+}
+  
+/* Favorite Button Animation */
+
+.favorite-btn {
+    transition:
+        transform 0.2s ease,
+        color 0.2s ease;
+}
+
+.favorite-btn:hover {
+    color: #facc15;
+    transform: scale(1.15);
+}
+
+.favorite-btn:active {
+    transform: scale(0.9);
+}
+
+.search-wrapper {
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.search-wrapper:focus-within {
+    border-color: rgba(56, 189, 248, 0.6);
+
+    box-shadow:
+        0 0 0 3px rgba(56, 189, 248, 0.08);
+}
+
+.search-suggestions {
+    max-height: 260px;
+    overflow-y: auto;
+}
+
+.suggestion-item {
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.suggestion-item:hover {
+    transform: translateX(3px);
+}
+
+@media (max-width: 600px) {
+
+    .clock-header {
+        align-items: flex-start;
+    }
+
+    .header-actions {
+        gap: 7px;
+    }
+
+    .theme-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+
+    .live-status {
+        font-size: 11px;
+    }
+
+    .country-card {
+        padding: 14px;
+    }
+
+    .city-title {
+        font-size: 15px;
+    }
+
+    .city-time {
+        font-size: 16px;
+    }
+
+    .city-right {
+        gap: 7px;
+    }
+
+    .favorite-btn {
+        font-size: 21px;
+    }
+
 }

@@ -1,3 +1,12 @@
+ // ============================================
+// WORLD CLOCK
+// ============================================
+
+
+// ─────────────────────────────────────────────
+// City Data
+// ─────────────────────────────────────────────
+
 let cities = [
     {
         name: "New Delhi",
@@ -246,12 +255,23 @@ let cities = [
     }
 ];
 
+
+// ─────────────────────────────────────────────
+// App State
+// ─────────────────────────────────────────────
+
 let selectedCity = cities[0];
+
 let displayedCities = cities;
 
+let favoriteCities = JSON.parse(
+    localStorage.getItem("favoriteCities")
+) || [];
 
 
-// Get UTC Offset
+// ─────────────────────────────────────────────
+// UTC Offset
+// ─────────────────────────────────────────────
 
 function getUTCOffset(timeZone) {
 
@@ -264,21 +284,24 @@ function getUTCOffset(timeZone) {
             return part.type === "timeZoneName";
         }).value;
 
+
     if (timeZoneName === "GMT") {
         return "UTC +00:00";
     }
+
 
     return timeZoneName.replace("GMT", "UTC ");
 }
 
 
-
-// Update Main Clock
-
+// ─────────────────────────────────────────────
+// Main Clock
+// ─────────────────────────────────────────────
 
 function updateMainClock() {
 
     let now = new Date();
+
 
     let time = now.toLocaleTimeString("en-US", {
         timeZone: selectedCity.timeZone,
@@ -286,6 +309,7 @@ function updateMainClock() {
         minute: "2-digit",
         second: "2-digit"
     });
+
 
     let date = now.toLocaleDateString("en-US", {
         timeZone: selectedCity.timeZone,
@@ -296,13 +320,26 @@ function updateMainClock() {
     });
 
 
-    document.getElementById("time").textContent = time;
+    let timeElement = document.getElementById("time");
+    let dateElement = document.getElementById("date");
+    let locationElement = document.querySelector(".location-name");
+    let clockInfo = document.getElementById("clockInfo");
 
-    document.getElementById("date").textContent = date;
+
+    if (timeElement) {
+        timeElement.textContent = time;
+    }
 
 
-    document.querySelector(".location-name").textContent =
-        `${selectedCity.flag} ${selectedCity.name}, ${selectedCity.country}`;
+    if (dateElement) {
+        dateElement.textContent = date;
+    }
+
+
+    if (locationElement) {
+        locationElement.textContent =
+            `${selectedCity.flag} ${selectedCity.name}, ${selectedCity.country}`;
+    }
 
 
     let hour = Number(
@@ -324,29 +361,46 @@ function updateMainClock() {
             : "🌙 Night";
 
 
-    document.getElementById("clockInfo").textContent =
-        `${dayNight} · ${getUTCOffset(selectedCity.timeZone)}`;
+    if (clockInfo) {
+        clockInfo.textContent =
+            `${dayNight} · ${getUTCOffset(selectedCity.timeZone)}`;
+    }
 }
 
 
+// ─────────────────────────────────────────────
 // Show City Cards
-
+// ─────────────────────────────────────────────
 
 function showCities(list) {
 
-    let countryList = document.getElementById("countryList");
+    let countryList =
+        document.getElementById("countryList");
+
+
+    if (!countryList) {
+        return;
+    }
+
 
     countryList.innerHTML = "";
 
 
-    // No results
     if (list.length === 0) {
 
         countryList.innerHTML = `
             <div class="no-results">
-                <div class="no-results-icon">🔍</div>
+
+                <div class="no-results-icon">
+                    🔍
+                </div>
+
                 <h3>No cities found</h3>
-                <p>Try searching with another city or country.</p>
+
+                <p>
+                    Try searching with another city or country.
+                </p>
+
             </div>
         `;
 
@@ -392,7 +446,16 @@ function showCities(list) {
                 : "";
 
 
+        let isFavorite =
+            favoriteCities.includes(city.name);
+
+
+        let favoriteIcon =
+            isFavorite ? "★" : "☆";
+
+
         countryList.innerHTML += `
+
             <div
                 class="country-card ${selectedClass}"
                 onclick="selectCity('${city.name}')"
@@ -401,17 +464,27 @@ function showCities(list) {
                 <div class="city-details">
 
                     <div class="city-title">
-                        <span class="city-flag">${city.flag}</span>
-                        <span>${city.name}</span>
+
+                        <span class="city-flag">
+                            ${city.flag}
+                        </span>
+
+                        <span>
+                            ${city.name}
+                        </span>
+
                     </div>
+
 
                     <div class="city-country">
                         ${city.country}
                     </div>
 
+
                     <div class="city-zone">
                         ${getUTCOffset(city.timeZone)}
                     </div>
+
 
                     <div class="city-day-night">
                         ${dayNight}
@@ -419,8 +492,22 @@ function showCities(list) {
 
                 </div>
 
-                <div class="city-time">
-                    ${time}
+
+                <div class="city-right">
+
+                    <div class="city-time">
+                        ${time}
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="favorite-btn"
+                        onclick="toggleFavorite(event, '${city.name}')"
+                    >
+                        ${favoriteIcon}
+                    </button>
+
                 </div>
 
             </div>
@@ -429,9 +516,9 @@ function showCities(list) {
 }
 
 
-
+// ─────────────────────────────────────────────
 // Select City
-
+// ─────────────────────────────────────────────
 
 function selectCity(cityName) {
 
@@ -447,132 +534,191 @@ function selectCity(cityName) {
 
     selectedCity = city;
 
+
     updateMainClock();
 
     showCities(displayedCities);
 }
 
 
+// ─────────────────────────────────────────────
+// Browse Button
+// ─────────────────────────────────────────────
 
-// Browse World Time
-
-
-document.getElementById("browseBtn").addEventListener("click", function() {
-
-    let section = document.getElementById("countrySection");
-
-    section.style.display = "block";
+let browseBtn =
+    document.getElementById("browseBtn");
 
 
-    displayedCities = cities;
+if (browseBtn) {
 
-    showCities(displayedCities);
+    browseBtn.addEventListener("click", function() {
 
-    showSearchHistory();
-
-});
-
+        let section =
+            document.getElementById("countrySection");
 
 
-// Search
+        if (section) {
+            section.style.display = "block";
+        }
 
 
-document.getElementById("search").addEventListener("input", function() {
-
-    let searchText = this.value.trim().toLowerCase();
+        displayedCities = cities;
 
 
-    let filteredCities = cities.filter(function(city) {
-
-        let cityName = city.name.toLowerCase();
-
-        let countryName = city.country.toLowerCase();
+        let search =
+            document.getElementById("search");
 
 
-        return (
-            cityName.includes(searchText) ||
-            countryName.includes(searchText)
-        );
-    });
+        if (search) {
+            search.value = "";
+        }
 
 
-    displayedCities = filteredCities;
+        let resultCount =
+            document.getElementById("resultCount");
 
 
-    //Result Count 
-
-    let resultCount =
-        document.getElementById("resultCount");
-
-
-    if (resultCount) {
-
-        if (searchText === "") {
-
+        if (resultCount) {
             resultCount.textContent = "";
-
-        } else if (filteredCities.length === 1) {
-
-            resultCount.textContent = "1 city found";
-
-        } else {
-
-            resultCount.textContent =
-                `${filteredCities.length} cities found`;
         }
-    }
 
 
-    // Suggestions 
-
-    let suggestions =
-        document.getElementById("searchSuggestions");
+        let suggestions =
+            document.getElementById("searchSuggestions");
 
 
-    if (suggestions) {
-
-        suggestions.innerHTML = "";
-
-
-        if (searchText !== "") {
-
-            let suggestionCities =
-                filteredCities.slice(0, 5);
+        if (suggestions) {
+            suggestions.innerHTML = "";
+        }
 
 
-            suggestionCities.forEach(function(city) {
+        showCities(displayedCities);
 
-                suggestions.innerHTML += `
-                    <div
-                        class="suggestion-item"
-                        onclick="selectSuggestion('${city.name}')"
-                    >
-                        <span>${city.flag}</span>
-                        <span>
-                            ${city.name}, ${city.country}
-                        </span>
-                    </div>
-                `;
+        showSearchHistory();
+
+        showFavorites();
+    });
+}
+
+
+// ─────────────────────────────────────────────
+// Search
+// ─────────────────────────────────────────────
+
+let searchInput =
+    document.getElementById("search");
+
+
+if (searchInput) {
+
+    searchInput.addEventListener("input", function() {
+
+        let searchText =
+            this.value.trim().toLowerCase();
+
+
+        let filteredCities =
+            cities.filter(function(city) {
+
+                let cityName =
+                    city.name.toLowerCase();
+
+                let countryName =
+                    city.country.toLowerCase();
+
+
+                return (
+                    cityName.includes(searchText) ||
+                    countryName.includes(searchText)
+                );
             });
+
+
+        displayedCities = filteredCities;
+
+
+        // Result Count
+
+        let resultCount =
+            document.getElementById("resultCount");
+
+
+        if (resultCount) {
+
+            if (searchText === "") {
+
+                resultCount.textContent = "";
+
+            } else if (filteredCities.length === 1) {
+
+                resultCount.textContent =
+                    "1 city found";
+
+            } else {
+
+                resultCount.textContent =
+                    `${filteredCities.length} cities found`;
+            }
         }
-    }
 
 
-    showCities(displayedCities);
+        // Suggestions
 
-});
+        let suggestions =
+            document.getElementById("searchSuggestions");
 
 
-// Select Search Suggestion
+        if (suggestions) {
 
+            suggestions.innerHTML = "";
+
+
+            if (searchText !== "") {
+
+                let suggestionCities =
+                    filteredCities.slice(0, 5);
+
+
+                suggestionCities.forEach(function(city) {
+
+                    suggestions.innerHTML += `
+
+                        <div
+                            class="suggestion-item"
+                            onclick="selectSuggestion('${city.name}')"
+                        >
+
+                            <span>
+                                ${city.flag}
+                            </span>
+
+                            <span>
+                                ${city.name}, ${city.country}
+                            </span>
+
+                        </div>
+
+                    `;
+                });
+            }
+        }
+
+
+        showCities(displayedCities);
+    });
+}
+
+
+// ─────────────────────────────────────────────
+// Search Suggestion
+// ─────────────────────────────────────────────
 
 function selectSuggestion(cityName) {
 
-    let selected = cities.find(function(city) {
-
-        return city.name === cityName;
-
-    });
+    let selected =
+        cities.find(function(city) {
+            return city.name === cityName;
+        });
 
 
     if (!selected) {
@@ -585,8 +731,13 @@ function selectSuggestion(cityName) {
     displayedCities = [selected];
 
 
-    document.getElementById("search").value =
-        selected.name;
+    let search =
+        document.getElementById("search");
+
+
+    if (search) {
+        search.value = selected.name;
+    }
 
 
     let suggestions =
@@ -617,9 +768,9 @@ function selectSuggestion(cityName) {
 }
 
 
-
-// Save Search History
-
+// ─────────────────────────────────────────────
+// Search History
+// ─────────────────────────────────────────────
 
 function saveSearch(cityName) {
 
@@ -628,20 +779,17 @@ function saveSearch(cityName) {
     ) || [];
 
 
-    // Remove duplicate
-    searchHistory = searchHistory.filter(function(city) {
-
-        return city !== cityName;
-
-    });
+    searchHistory =
+        searchHistory.filter(function(city) {
+            return city !== cityName;
+        });
 
 
-    // Add newest search at beginning
     searchHistory.unshift(cityName);
 
 
-    // Keep only latest 5
-    searchHistory = searchHistory.slice(0, 5);
+    searchHistory =
+        searchHistory.slice(0, 5);
 
 
     localStorage.setItem(
@@ -651,8 +799,9 @@ function saveSearch(cityName) {
 }
 
 
+// ─────────────────────────────────────────────
 // Show Search History
-
+// ─────────────────────────────────────────────
 
 function showSearchHistory() {
 
@@ -660,7 +809,6 @@ function showSearchHistory() {
         document.getElementById("searchHistory");
 
 
-    // Prevent JavaScript error
     if (!historyBox) {
         return;
     }
@@ -680,38 +828,265 @@ function showSearchHistory() {
 
 
     historyBox.innerHTML = `
+
         <div class="history-title">
             Recent Searches
         </div>
+
     `;
 
 
     searchHistory.forEach(function(cityName) {
 
         historyBox.innerHTML += `
+
             <div
                 class="history-item"
                 onclick="selectSuggestion('${cityName}')"
             >
+
                 <span>🕘</span>
-                <span>${cityName}</span>
+
+                <span>
+                    ${cityName}
+                </span>
+
             </div>
+
         `;
     });
 }
 
 
+// ─────────────────────────────────────────────
+// Favorites
+// ─────────────────────────────────────────────
 
+function toggleFavorite(event, cityName) {
+
+    event.stopPropagation();
+
+
+    let cityIndex =
+        favoriteCities.indexOf(cityName);
+
+
+    if (cityIndex === -1) {
+
+        favoriteCities.push(cityName);
+
+    } else {
+
+        favoriteCities.splice(cityIndex, 1);
+    }
+
+
+    localStorage.setItem(
+        "favoriteCities",
+        JSON.stringify(favoriteCities)
+    );
+
+
+    showCities(displayedCities);
+
+    showFavorites();
+}
+
+
+// ─────────────────────────────────────────────
+// Show Favorites
+// ─────────────────────────────────────────────
+
+function showFavorites() {
+
+    let favoritesList =
+        document.getElementById("favoritesList");
+
+
+    if (!favoritesList) {
+        return;
+    }
+
+
+    favoritesList.innerHTML = "";
+
+
+    if (favoriteCities.length === 0) {
+
+        favoritesList.innerHTML = `
+
+            <div class="empty-favorites">
+
+                <div>☆</div>
+
+                <p>
+                    No favorite cities yet.
+                </p>
+
+                <span>
+                    Click the star on a city to save it.
+                </span>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    favoriteCities.forEach(function(cityName) {
+
+        let city =
+            cities.find(function(city) {
+                return city.name === cityName;
+            });
+
+
+        if (!city) {
+            return;
+        }
+
+
+        let time = new Date().toLocaleTimeString("en-US", {
+            timeZone: city.timeZone,
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit"
+        });
+
+
+        favoritesList.innerHTML += `
+
+            <div
+                class="favorite-card"
+                onclick="selectCity('${city.name}')"
+            >
+
+                <div class="favorite-city">
+
+                    <span class="city-flag">
+                        ${city.flag}
+                    </span>
+
+
+                    <div>
+
+                        <div class="favorite-city-name">
+                            ${city.name}
+                        </div>
+
+                        <div class="favorite-country">
+                            ${city.country}
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="favorite-time">
+                    ${time}
+                </div>
+
+            </div>
+
+        `;
+    });
+}
+
+
+// ─────────────────────────────────────────────
+// Theme System
+// ─────────────────────────────────────────────
+
+let themeBtn =
+    document.getElementById("themeBtn");
+
+
+function applyTheme() {
+
+    let savedTheme =
+        localStorage.getItem("theme");
+
+
+    if (savedTheme === "light") {
+
+        document.body.classList.add(
+            "light-theme"
+        );
+
+        if (themeBtn) {
+            themeBtn.textContent = "☀️";
+        }
+
+    } else {
+
+        document.body.classList.remove(
+            "light-theme"
+        );
+
+        if (themeBtn) {
+            themeBtn.textContent = "🌙";
+        }
+    }
+}
+
+
+applyTheme();
+
+
+if (themeBtn) {
+
+    themeBtn.addEventListener("click", function() {
+
+        document.body.classList.toggle(
+            "light-theme"
+        );
+
+
+        let isLight =
+            document.body.classList.contains(
+                "light-theme"
+            );
+
+
+        if (isLight) {
+
+            themeBtn.textContent = "☀️";
+
+            localStorage.setItem(
+                "theme",
+                "light"
+            );
+
+        } else {
+
+            themeBtn.textContent = "🌙";
+
+            localStorage.setItem(
+                "theme",
+                "dark"
+            );
+        }
+    });
+}
+
+
+// ─────────────────────────────────────────────
 // Initial Setup
-
+// ─────────────────────────────────────────────
 
 updateMainClock();
 
 showSearchHistory();
 
+showFavorites();
 
+
+// ─────────────────────────────────────────────
 // Live Update
-
+// ─────────────────────────────────────────────
 
 setInterval(function() {
 
@@ -728,7 +1103,8 @@ setInterval(function() {
     ) {
 
         showCities(displayedCities);
-    }
 
+        showFavorites();
+    }
 
 }, 1000);
